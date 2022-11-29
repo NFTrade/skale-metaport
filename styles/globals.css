@@ -20,7 +20,38 @@ a {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: black;
+    background: white;
   }
+}
+
+
+.knkCnzLsELcRXv9acefz {
+  top: 50px!important;
+  bottom: 50px!important;
+  left: 0!important;
+  right: 0!important;
+}
+
+.css-15vxxtn {
+  box-shadow: none!important;
+  border: none!important;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
