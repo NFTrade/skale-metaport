@@ -68,7 +68,7 @@ export default function Home() {
       const metaport = new Metaport(metaportConfig as any);
       window.addEventListener(
         "metaport_transferComplete",
-        async (e) => {
+        async (e: any) => {
           const { from, to } = e.detail;
           if (from === 'elated-tan-skat' && to === 'honorable-steel-rasalhague') {
             transferCompleted();

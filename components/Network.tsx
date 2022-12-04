@@ -56,8 +56,8 @@ export const changeNetwork = async (chainId: string) => {
           { chainId },
         ], // chainId must be in hexadecimal numbers
       });
-    } catch(e) {
-      if (e.code !== 4902) return;
+    } catch(e: any) {
+      if (![4902, -32603].includes(e.code)) return;
       const network = networks.find(chain => chain.chainId === chainId);
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -68,45 +68,44 @@ export const changeNetwork = async (chainId: string) => {
         ]
       });
     }
-  } catch (err) {
+  } catch (err: any) {
     console.error(err.message);
   }
 };
 
+declare const window: any;
+
 export default function Network() {
-  const [connectedNetwork, setConnectedNetwork] = useState('');
+  const [connectedNetwork, setConnectedNetwork] = useState(CALYPSO);
 
   const networkChanged = (chainId: string | number) => {
     setConnectedNetwork(getChainId(Number(chainId)));
   };
 
   useEffect(() => {
-    if (typeof window?.ethereum?.networkVersion === 'string') {
+    if (window?.ethereum?.networkVersion && getChainId(Number(window?.ethereum?.networkVersion)) !== connectedNetwork) {
       setConnectedNetwork(getChainId(Number(window?.ethereum?.networkVersion)));
-      window?.ethereum?.on("chainChanged", networkChanged);
     }
+  }, [connectedNetwork]);
 
-    return () => {
-      window?.ethereum?.removeListener("chainChanged", networkChanged);
-    };
+  useEffect(() => {
+    window?.ethereum?.on("chainChanged", networkChanged);
   }, []);
 
-  if (connectedNetwork) {
-    return (
-      <div>
-        <FormControl>
-        <Select
-          value={connectedNetwork}
-          onChange={(e: SelectChangeEvent) => changeNetwork(e.target.value)}
-        >
-          {
-            networks.map(({chainName, chainId}) => <MenuItem value={chainId} key={chainId}>{chainName}</MenuItem>)
-          }
-        </Select>
-        </FormControl>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <FormControl>
+      <Select
+        value={connectedNetwork}
+        onChange={(e: SelectChangeEvent) => changeNetwork(e.target.value)}
+      >
+        {
+          networks.map(({chainName, chainId}) => <MenuItem value={chainId} key={chainId}>{chainName}</MenuItem>)
+        }
+      </Select>
+      </FormControl>
+    </div>
+  );
 
   return <></>;
 }

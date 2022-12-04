@@ -39,6 +39,7 @@ a {
 }
 
 .header {
+  height: 50px;
   position: fixed;
   top: 0;
   display: flex;
@@ -49,6 +50,7 @@ a {
 }
 
 .footer {
+  height: 50px;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -88,6 +90,6 @@ a {
   margin-top: 50px;
 }
 
-.MuiList-root {
-  z-index: 9999999999;
+.MuiList-root, .MuiPopover-root, .MuiMenu-root, .MuiModal-root {
+  z-index: 9999999999!important;
 }
