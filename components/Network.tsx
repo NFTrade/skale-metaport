@@ -1,50 +1,11 @@
 import { useState, useEffect } from "react";
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { CALYPSO, networks } from "../util/config";
+import { getChainId } from "../util/functions";
 
-const getChainId = (chainId: string | number) => `0x${Number(chainId).toString(16)}`;
-
-export const EUROPA = getChainId(2046399126);
-export const CALYPSO = getChainId(1564830818);
-
-const networks = [
-  {
-    chainId: getChainId(1),
-    chainName: "Ethereum Mainnet",
-    nativeCurrency: {
-      name: "ETH",
-      symbol: "ETH",
-      decimals: 18
-    },
-    rpcUrls: ["https://rpc.ankr.com/eth"],
-    blockExplorerUrls: ["https://etherscan.io/"]
-  },{
-    chainId: EUROPA,
-    chainName: "Europa SKALE Chain",
-    nativeCurrency: {
-      nname: "sFUEL",
-      symbol: "SFUEL",
-      decimals: 18
-    },
-    rpcUrls: ["https://mainnet.skalenodes.com/v1/elated-tan-skat"],
-    blockExplorerUrls: ["https://elated-tan-skat.explorer.mainnet.skalenodes.com"]
-  },
-  {
-    chainId: CALYPSO,
-    chainName: "Calypso SKALE Chain",
-    nativeCurrency: {
-      name: "sFUEL",
-      symbol: "SFUEL",
-      decimals: 18
-    },
-    rpcUrls: [
-      "https://mainnet.skalenodes.com/v1/honorable-steel-rasalhague",
-    ],
-    blockExplorerUrls: ["https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com"]
-  }
-];
+declare const window: any;
 
 export const changeNetwork = async (chainId: string) => {
   try {
@@ -72,8 +33,6 @@ export const changeNetwork = async (chainId: string) => {
     console.error(err.message);
   }
 };
-
-declare const window: any;
 
 export default function Network() {
   const [connectedNetwork, setConnectedNetwork] = useState(CALYPSO);
@@ -106,6 +65,4 @@ export default function Network() {
       </FormControl>
     </div>
   );
-
-  return <></>;
 }

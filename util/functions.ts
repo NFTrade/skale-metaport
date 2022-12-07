@@ -1,0 +1,1 @@
+export const getChainId = (chainId: string | number) => `0x${Number(chainId).toString(16)}`;

@@ -1,61 +1,13 @@
 import { useEffect, useState } from 'react';
-import Network, { CALYPSO, changeNetwork } from '../components/Network';
+import Network, { changeNetwork } from '../components/Network';
+import { CALYPSO, metaportConfig } from '../util/config';
 
-const metaportConfig = {
-  openOnLoad     : true,
-  openButton     : false,
-  mainnetEndpoint: 'https://mainnet.skalenodes.com/v1/elated-tan-skat',
-  skaleNetwork   : 'mainnet',
-  chains         : [
-    'mainnet',
-    'elated-tan-skat',
-    'honorable-steel-rasalhague',
-  ],
-  chainsMetadata: {
-    'elated-tan-skat': {
-      alias      : 'Europa SKALE Chain',
-      minSfuelWei: '1',
-      faucetUrl  : 'https://ruby.exchange/faucet.html',
-    },
-    'honorable-steel-rasalhague': {
-      alias      : 'Calypso SKALE Chain',
-      minSfuelWei: '1',
-      faucetUrl  : 'https://sfuel.dirtroad.dev',
-    },
-  },
-  tokens: {
-    mainnet: {
-      eth: {
-        chains: [
-          'elated-tan-skat',
-        ],
-      },
-    },
-    'elated-tan-skat': {
-      erc20: {
-        wETH: {
-          iconUrl: 'https://ruby.exchange/images/tokens/eth-square.jpg',
-          address: '0xa5274efA35EbeFF47C1510529D9a8812F95F5735', // wrapper token address
-          symbol : 'ETH', // UI: token symbol display name (On the left).
-          name   : 'ETH', // UI: token symbol display name (On the left).
-          wraps  : {
-            address: '0xD2Aaa00700000000000000000000000000000000', // unwrapped token address
-            symbol : 'ETH', // UI: token symbol display name for the balance (On the right).
-          },
-        },
-      },
-    },
-},
-  theme: {
-    primary   : '#000000',
-    background: '#ffffff',
-    mode      : 'light',
-  },
-};
+declare const window: any;
 
 export default function Home() {
 
   const [completed, setCompleted] = useState(false);
+  const [supported, setSupported] = useState(true);
 
   const transferCompleted = async () => {
     setCompleted(true);
@@ -82,7 +34,11 @@ export default function Home() {
   }
 
   useEffect(() => {
-    loadMetaport();
+    if (!window.ethereum) {
+      setSupported(false);
+    } else {
+      loadMetaport();
+    }
   }, []);
   return (
     <div>
@@ -106,9 +62,19 @@ export default function Home() {
         <h2>SKALE Metaport</h2>
       </div>
       <div id="metaport" />
+      {
+        !supported && (
+          <div className="completed">
+            <p>Looks like your device is not compatible with loading metaport inside an iframe</p>
+            <h3>
+              <a target="_blank" href={location.href} rel="noreferrer">Open in New Tab</a>
+            </h3>
+          </div>
+        )
+      }
       <div className="footer">
         <div>
-          <a rel="noreferrer" href="https://skale.space/blog/how-to-use-nftrade-on-skale" target="_blank">Need help?</a>
+          <a rel="noreferrer" href="https://link.skale.space/metaport-guide" target="_blank">Need help?</a>
         </div>
         <div>
           <Network />
