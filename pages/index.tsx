@@ -110,42 +110,52 @@ export default function Home() {
           </div>
         )
       }
+      {
+        flow && (
+          <div className="back-btn" onClick={() => setFlow('')}>
+            {'< Back'}
+          </div>
+        )
+      }
       <div className="header">
-        <h2>SKALE Add Funds</h2>
+        SKALE Bridge
       </div>
 
       <div className="body">
         {
           !flow && (
             <div>
-              <h3>Hey!</h3>
-              <p>Welcome to the SKALE Metaport widget.</p>
-              <p>SKALE Metaport was created as a super fast, simple way for users to use the <b>chain to chain bridging capabilities of the SKALE Network</b></p>
-              <p>You are about to bridge ETH to the <b>Calypso NFT Hub</b> going through <b>Europa Liquidity Hub</b></p>
-              <p><b>Europa Liquidity Hub</b> is the entry point for tokens (e.g., ETH, SKL, USDC) onto the SKALE Network</p>
-              <p><b>Calypso NFT Hub</b> id the official launch point for SKALE NFT Projects</p>
-              <div className="bridge-btn" onClick={() => setFlow(FROM_ETH)}>
-                Get From "Ethereum Mainnet"
+              <div className="hint">
+                <p>Welcome to the SKALE Metaport widget.</p>
+                <p>SKALE Metaport was created as a super fast, simple way for users to use the chain-to-chain bridging capabilities of the SKALE Network</p>
+                <p>You are about to bridge ETH to the Calypso NFT Hub going through Europa Liquidity Hub</p>
               </div>
+              <div className="buttons-title">
+                Get ETH From
+              </div>
+              <div className="bridge-btn" onClick={() => setFlow(FROM_ETH)}>
+                Ethereum Mainnet
+              </div>
+              <div className="buttons-or">or</div>
               <div className="bridge-btn" onClick={() => setFlow(FROM_EUROPA)}>
-                Get From "Europa Hub"
+                Europa Liquidity Hub
               </div>
             </div>
           )
         }
         {
           flow === FROM_ETH && (
-            <div>
-              <h3>Get From "Ethereum Mainnet"</h3>
-              <p>You are about to transfer <b>ETH</b> from <b>Ethereum Mainnet</b> to <b>Europa Liquidity Hub</b></p>
+            <div className="hint">
+              <p><div className="hint-title">Get From Ethereum Mainnet</div></p>
+              <p>You are about to transfer ETH from Ethereum Mainnet to Europa Liquidity Hub</p>
             </div>
           )
         }
         {
           flow === FROM_EUROPA && (
-            <div>
-              <h3>Get From "Europa Hub"</h3>
-              <p>You are about to transfer <b>ETH</b> from <b>Europa Liquidity Hub</b> to <b>Calypso NFT Hub</b></p>
+            <div className="hint">
+              <p><div className="hint-title">Get From Europa Liquidity Hub</div></p>
+              <p>You are about to transfer ETH from Europa Liquidity Hub to Calypso NFT Hub</p>
             </div>
           )
         }
