@@ -35,13 +35,13 @@ export default function Home() {
             transferCompleted();
           } else if (to === 'elated-tan-skat') {
             setFlow(FROM_EUROPA);
-            const params = {
-              amount: '1000000000000000000', // amount to transfer (in wei) - for eth, erc20 and erc1155 tokens
+            /* const params = {
+              amount: '1', // amount to transfer (in wei) - for eth, erc20 and erc1155 tokens
               chains: ['elated-tan-skat', 'honorable-steel-rasalhague'], // 'from' and 'to' chains (must be present in the list on chains)
               tokenKeyname: '_ETH_0xa5274efA35EbeFF47C1510529D9a8812F95F5735', // token that you want to transfer
               tokenType: 'erc20',
             };
-            _metaport.transfer(params as any);
+            _metaport.transfer(params as any); */
           }
         },
         false
@@ -54,24 +54,26 @@ export default function Home() {
 
   const loadFromEth = async () => {
     const params = {
-        amount: '1000000000000000000', // amount to transfer (in wei) - for eth, erc20 and erc1155 tokens
+        amount: '1', // amount to transfer (in wei) - for eth, erc20 and erc1155 tokens
         chains: ['mainnet', 'elated-tan-skat'], // 'from' and 'to' chains (must be present in the list on chains)
         tokenKeyname: 'eth', // token that you want to transfer
         tokenType: 'eth',
     };
     if (metaport) {
+      await metaport.reset();
       metaport.transfer(params as any);
     }
   }
 
   const loadFromEuropa = async () => {
     const params = {
-        amount: '1000000000000000000', // amount to transfer (in wei) - for eth, erc20 and erc1155 tokens
+        amount: '1', // amount to transfer (in wei) - for eth, erc20 and erc1155 tokens
         chains: ['elated-tan-skat', 'honorable-steel-rasalhague'], // 'from' and 'to' chains (must be present in the list on chains)
         tokenKeyname: '_ETH_0xa5274efA35EbeFF47C1510529D9a8812F95F5735', // token that you want to transfer
         tokenType: 'erc20',
     };
     if (metaport) {
+      await metaport.reset();
       metaport.transfer(params as any);
     }
   }

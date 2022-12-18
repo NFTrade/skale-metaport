@@ -27,6 +27,10 @@ a {
   }
 }
 
+body {
+  padding: 8px;
+}
+
 .metaport-hidden {
   display: none;
 }
@@ -54,10 +58,6 @@ a {
   line-height: 24px;
   margin-bottom: 16px;
   font-weight: 700;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,18 +65,17 @@ a {
 }
 
 .body {
-  margin-top: 48px;
+  margin-top: 24px;
 }
 
 .footer {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 
 .MuiOutlinedInput-notchedOutline {
@@ -139,14 +138,14 @@ a {
 .back-btn {
   cursor: pointer;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 8px;
+  left: 8px;
   z-index: 99;
   font-size: 14px;
 }
 
 .hint {
-  padding: 8px 20px;
+  padding: 8px 16px;
   border: 1px solid #d5d5d5;
   border-radius: 8px;
 }
@@ -165,7 +164,7 @@ p {
 .buttons-title {
   margin-top: 16px;
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .buttons-or {
